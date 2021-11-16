@@ -1,0 +1,92 @@
+#control-box {
+    /*border: 1px solid black;*/
+	overflow: auto;
+	padding: 10px;
+	display: flex;
+	flex-wrap: wrap;
+}
+	#sectionlines {
+		background: url(sq_joystick_back.png) 0 0;
+		border: 5px inset #ccffff;
+		margin: 0 5px 20px 0;
+		position: relative;
+		height: 110px;
+		width: 110px;
+		display: inline-block;
+		float: left;
+	}
+		#joystick{
+			background-color: #800080;
+			border-radius: 50%;
+			height: 30px;
+			width: 30px;
+			position: absolute;
+			box-shadow: 3px 3px 8px hsla(0, 0%, 10%, 0.7);
+			z-index: 3;
+		}
+		
+	#inputs {
+		/*border: 1px solid red;*/
+		padding: 10px;
+		display: table;
+	}
+		#inputs .Txt {
+			display: inline-block;
+			margin: 5px;
+		}
+		#inputs .slid {
+			display: inline-block;
+			margin: 5px;
+		}
+		#inputs p {
+			display: inline-block;
+		}
+		#inputs > button {
+			background-color: #0000ff;
+			border: none;
+			color: white;
+			font-size: 1em;
+			margin: 5px;
+			border-radius: 5px;
+			outline: none;
+			box-shadow: 0px 3px hsla(180, 100%, 40%,0.8);
+		}
+		#inputs button:active {
+			background-color: #000080;
+			transform: translateY(2px);
+			color: #cccccc;
+			box-shadow: 0px 1px hsla(180, 100%, 10%,0.8);
+		}
+		
+	#button-box {
+		/*border: 1px solid green;*/
+		display: inline-block;
+		width: auto;
+		height: 100%;
+		text-align: center;
+		padding: 5px;
+	}
+	    #button-box button {
+			height: 25px;
+			width: 25px;
+			text-align: center;
+			border-color: #666666;
+			border-radius: 50%;
+			outline: none;
+			float: left;
+			margin: 3px;
+		}
+		
+#data {
+    /*border: 1px solid blue;*/
+	background-color: #afafaf;
+	text-align: center;
+}
+    #data > button {
+	    background-color: black;
+		color: white;
+		font-size: 1.5em;
+		padding: 5px;
+		outline: none;
+		margin: 7px;
+	}

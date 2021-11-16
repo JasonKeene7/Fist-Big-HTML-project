@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Square Joystick</title>
+<link rel='stylesheet' href='Square joystick.css'>
+</head>
+<body>
+
+<div id='main'>
+    <div id='control-box'>
+		<div id='smlback'></div>
+		<div id='sectionlines' style='transform:null;'>
+			<div id='joystick' style='left:40px;bottom:40px;'></div>
+		</div>
+		
+		<div id='inputs' style='transform:null;'>
+		    <div id='button-box'>
+					<button id='btA' oncontextmenu='bttnclr()' 
+						style='background-color:blue;'>A</button>
+					<button id='btB' oncontextmenu='bttnclr()' 
+						style='background-color:red;'>B</button>
+					<button id='btX' oncontextmenu='bttnclr()' 
+						style='background-color:green;'>X</button>
+					<button id='btY' oncontextmenu='bttnclr()' 
+						style='background-color:yellow;'>Y</button>
+			</div><hr><hr>
+			<p>x-axis: </p><input type='text' id='y-axis' min='-50' max='50' 
+			                placeholder='Min:-50 Max:50' class='Txt'
+							value=''><br>
+			<p>y-axis: </p><input type='text' id='x-axis' min='-50' max='50' 
+			                placeholder='Min:-50 Max:50' class='Txt'
+							value=''><br>
+			<button onclick='jostfunction()'>Move Joystick</button><hr>
+			
+			<p>x-axis: </p><input type='range' id='y-axis-slide' min='-50' max='50' 
+			                placeholder='Min:-50 Max:50' class='slid'
+							value='' onchange='slidefunction()'><br>
+			<p>y-axis: </p><input type='range' id='x-axis-slide' min='-50' max='50' 
+			                placeholder='Min:-50 Max:50' class='slid'
+							value='' onchange='slidefunction()'><br><hr>
+							<p id='co-co'>Position: ( , )</p><hr><hr>
+		</div>
+
+	</div>
+	<div id='data'>
+	    Joystick Magnifier: 
+		<input type='number' style='width:100px;' id='scale_slide' 
+		min='1' max='4' value='' placeholder='Range: 1-4' step='.5'>
+	    <button onclick='scalefct()'>Joystick: Scale up</button>
+		<button onclick='scalednfct()'>Joystick: Scale down</button>
+	</div>
+</div>
+<script>
+var doid, teda;
+var jost, jostx, josty;
+
+    doid = null;
+	teda = document.getElementById('data');
+	
+    jost = document.getElementById('joystick');
+	
+	jostx = document.getElementById('x-axis');
+	josty = document.getElementById('y-axis');
+	
+	slidex = document.getElementById('x-axis-slide');
+	slidey = document.getElementById('y-axis-slide');
+	
+	function jostfunction() {
+		let x = Number(jostx.value);
+		if (x > 50) {
+			x = 50;
+			jostx.value = 50;
+			}
+		else if (x < -50) {
+			x = -50;
+			jostx.value = -50;
+		}
+		let y = Number(josty.value);
+		if (y > 50) {
+			y = 50;
+			josty.value = 50;
+		}
+		else if (y < -50) {
+			y = -50;
+			josty.value = -50;
+		}
+		joystick.style.bottom = (x + 40) + 'px';
+		joystick.style.left = (y + 40) + 'px';
+		document.getElementById('co-co').innerHTML = 'Position: ( '
+		+ y + ', ' + x + ')';
+	}	
+	function slidefunction() {
+		let x = Number(slidex.value);
+		let y = Number(slidey.value);
+		joystick.style.bottom = (x + 40) + 'px';
+		joystick.style.left = (y + 40) + 'px';
+		document.getElementById('co-co').innerHTML = 'Position: ( '
+		+ y + ', ' + x + ')';
+	}
+	function scalefct() {
+	    var scl = document.getElementById('scale_slide').value;
+		var buffer = (scl*10) + 8;
+		if(window.innerWidth <= 825) {
+		var rescl = (window.innerWidth-210)/140;
+			if(rescl < scl) {
+			    buffer = (rescl*10) + 8;
+				document.getElementById('sectionlines').style.transform =
+				'scale(' + rescl + ',' + rescl + ') translate('+buffer+'px,'+buffer+'px)';
+				document.getElementById('scale_slide').value =
+				rescl;
+				document.getElementById('inputs').style.transform =
+				'translateY('+((rescl*80)+(rescl/10))+'px)';
+				document.getElementById('button-box').style.transform =
+				'translate(-155px,'+(-140-((rescl*80)+(rescl/10)))+'px)';
+			}
+			else {
+			    document.getElementById('sectionlines').style.transform =
+				'scale(' + scl + ',' + scl + ') translate(' + buffer + 'px,'+ buffer +'px)';
+				document.getElementById('inputs').style.transform =
+				'translateY('+((scl*80)+(scl/10))+'px)';
+				document.getElementById('button-box').style.transform =
+				'translate(-155px,'+(-140-((scl*80)+(scl/10)))+'px)';
+			}
+		}
+		else {
+		    document.getElementById('sectionlines').style.transform =
+		    'scale(' + scl + ',' + scl + ') translate(' + buffer + 'px,'+ buffer +'px)';
+			document.getElementById('button-box').style.transform =
+			'translate(-155px, 0px)';
+			document.getElementById('inputs').style.transform =
+		    null;
+		}
+	}
+	function scalednfct() {
+	    document.getElementById('sectionlines').style.transform =
+		null;
+		document.getElementById('inputs').style.transform =
+		null;
+		if(window.innerWidth <= 825) {
+			document.getElementById('button-box').style.transform = 
+			'translate(-155px,-140px)';
+		}
+		else {
+		    document.getElementById('button-box').style.transform = 
+			'translate(-155px,0px)';
+		}
+	}
+</script>
+</body>
+</html>
